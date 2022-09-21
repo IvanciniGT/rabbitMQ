@@ -90,6 +90,7 @@ Execute that installer -> C:\Program files\rabbitmq -> ZIP -> email
 
 --- 
 Production environments:
+
 - High Availability
     Trying to keep the system up(ready) a certain amount of time.
         90% ? This is horrible!!!! 1 day of 10 that my system can be down: 36,5 days/year       | €
