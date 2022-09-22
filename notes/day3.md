@@ -249,7 +249,32 @@ FD(n)                       |                           Q(m).                   
                                                 How many conenctions do my PS needs againt RABBIT? 1
                                                 How many channels? m
     EXCHANGE0:
-        TYPE: HEADER,  TOPIC
+        TYPE: 
+            HEADER:                     HEADERS
+                bind:
+                    EXCHANGE1           fire=true
+                    
+                    ControlQueue        firedetector=true
+                                        alive=true
+                                        x-match=any             # All the headers have to be matched
+                                        x-match=all
+                                    
+                                        ROUTING_KEY
+            TOPIC:
+                    EXCHANGE1           firedetector.fire
+                    ControlQueue        firedetector.*
+                    
+                    
+            Routing keys consist of several word with a '.' between them
+            An asterisk '*' may be used for 1 single word:
+                firedetector.*          firedetector.fire       √
+                                        firedetector.           √
+                                        firedetector.fire.big   x
+                firedetector.*.big
+            An '#' can be used as a wildcard to include any number of words (even 0)    
+                firedetector.#          firedetector.fire       √
+                                        firedetector.           √
+                                        firedetector.fire.big   √
         INTERNAL: FALSE
     EXCHANGE1. TYPE: FANOUT
                INTERNAL: TRUE 
