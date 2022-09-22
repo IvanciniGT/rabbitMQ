@@ -12,8 +12,10 @@ public class FireDetector {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        channel.basicPublish("fireDispatcher", "firedetector.fire", null, "EMPTY".getBytes("UTF-8"));
+        channel.basicPublish("fireDispatcher", "firedetector.fire", 
+                            null, "EMPTY".getBytes("UTF-8"));
         System.out.println(" [x] Sent ");
+        
     }
 
 }
