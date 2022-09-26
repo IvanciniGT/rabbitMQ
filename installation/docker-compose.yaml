@@ -1,22 +1,35 @@
 version: "3"
 
 services:
-    rabbit1:
-        container_name:     rabbit1
+    rabbit1:                            # It is a netkork name. 
+                                        # A FQDN name that we can use to connecto / contact from 1 container to another
+        container_name:     rabbit1     # It is the container name. To be used by docker commands
+        hostname:           rabbit1     # The host name as defined inside the container
         image:              rabbitmq:3.10.7-management
         ports:
                             - 5673:5672
                             - 8081:15672
         volumes:
-                            - /home/ubuntu/environment/data/rabbit1:/var/lib/rabbitmq
+                            - /home/ubuntu/environment/data/rabbit1:/var/lib/rabbitmq # Store persistent information
+                            - /home/ubuntu/environment/training/installation/cluster.conf:/config/cluster.conf # To inject Host files into the Container's F
+        environment:
+                            RABBITMQ_CONFIG_FILE: /config/cluster.conf
+                            RABBITMQ_ERLANG_COOKIE: XHGQUSIXUUGOBIQJLCWE
+
+        
     rabbit2:
         container_name:     rabbit2
+        hostname:           rabbit2
         image:              rabbitmq:3.10.7-management
         ports:
                             - 5674:5672
                             - 8082:15672
         volumes:
                             - /home/ubuntu/environment/data/rabbit2:/var/lib/rabbitmq
+                            - /home/ubuntu/environment/training/installation/cluster.conf:/config/cluster.conf # To inject Host files into the Container's FS
+        environment:
+                            RABBITMQ_CONFIG_FILE: /config/cluster.conf
+                            RABBITMQ_ERLANG_COOKIE: XHGQUSIXUUGOBIQJLCWE
 
 # docker-compose up
 # docker-compose up -d # Dettached mode

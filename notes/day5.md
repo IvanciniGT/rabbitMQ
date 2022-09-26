@@ -54,3 +54,66 @@ RabbitMQ v3.0.8 >> Create a new container with the new Image... That's all.
 
 Persistent Volume? Folder from the external FileSystem (HOST FS) 
                     that we can MOUNT into the CONTAINER's FS
+                    
+                    
+POSIX?
+/
+/home           user folders
+/root           root user folder
+/bin            commands / binaries
+/opt            software
+/var            software persistent information
+/etc            configuration files
+/tmp            Temporary files
+/mnt            Mount points
+
+What is UNIX®? POSIX & SUS < Austin Group
+
+What was UNIX®? UNIX was an Operating System.... Lab. Bells @ AT&T 
+    +400 versions of UNIX 
+
+2 Standart
+Oracle - Solaris (UNIX®)
+HP     - HP-UX   (UNIX®)
+IBM    - AIX     (UNIX®)
+Apple  - MacOS   (UNIX®)
+         Oracle Unbreakable Linux
+
+Berkley University (California) 386-BSD > 4 years of legal troubles...  
+BSD family:
+    netBSD
+    freeBSD
+    MacOS
+
+GNU (Richard Stallman): GNU is Not Unix
+    gnome
+    gedit
+    gcc
+    bash
+    chess
+    NO KERNEL !!!!!!
+
+Linus Torvalds: Linus' UNIX : Linux
+
+GNU/Linux -> Linux
+    RedHat
+    Suse
+    Debian -> Ubuntu
+
+Android -> Linux + Google libs
+
+
+
+4040
+8080
+8086
+286
+386 <
+486
+Pentium
+P DualCore
+i3
+i5
+i7
+i9
+
