@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+    rabbit1:
+        container_name:     rabbit1
+        image:              rabbitmq:3.10.7-management
+        ports:
+                            - 5673:5672
+                            - 8081:15672
+        volumes:
+                            - /home/ubuntu/environment/data/rabbit1:/var/lib/rabbitmq
+    rabbit2:
+        container_name:     rabbit2
+        image:              rabbitmq:3.10.7-management
+        ports:
+                            - 5674:5672
+                            - 8082:15672
+        volumes:
+                            - /home/ubuntu/environment/data/rabbit2:/var/lib/rabbitmq
+
+# docker-compose up
+# docker-compose up -d # Dettached mode
+# docker-compose stop
+# docker-compose start
+# docker-compose down

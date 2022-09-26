@@ -5,3 +5,7 @@ docker run -it -d --name rabbitmq -p 5672:5672 -p 8080:15672 rabbitmq:3.10.7-man
                                                     # 8080
                                                     # 8081
                                                     # 8082
+
+docker start rabbitmq
+# Here we start:
+#   A rabbitMQ NODE but also a CLUSTER
