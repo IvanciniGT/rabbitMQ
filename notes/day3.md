@@ -86,7 +86,7 @@ Information that the producer may to supply:
 
 # Scenerio 1: Multiplayer Internet Game 
 
-Clash royale: 2 vs 2... 4 people
+Clash royale: 2 vs 2... 4 people: 3 minutes + 2 extra match
 
                                 RABBITMQ
     Player1         Direct.Exchange  ------  Queue1                              Player1
@@ -141,7 +141,14 @@ Clash royale: 2 vs 2... 4 people
         When? when the game starts
         Deleted when the game ends?
             Exchange? Autodelete?   YES
-            Queues?   Autodelete?   NO (We don't want to delete the queue if the player lose its signal)
+            Queues?   Autodelete?   NO 
+                (We don't want to delete the queue if the player loses its signal)
+                      Classic vs Quorum:  Classic
+                      Durable or Transient: Transient
+                      Time to live:     Could be between 3 and 5 minutes
+                                        5 minutes  x 60 x 1000
+                      Auto Expire:      If the player is not playing in more than 30s 
+                      
         Who is going to delete the queues?  A service in the main server controlling the game
         
         Durability of the Queues and the Exchange? In case rabbitMQ gets OFFLINE do we still want these objects? NO
@@ -212,6 +219,11 @@ Card reader --> EXCHANGE--> PendingPaymentQueue < --   Program is going to look 
 
 PendingPaymentQueue: 
     Auto-Delete? NO, for sure !
+    Classic or a Quorum: Quorum -> Durable
+    Max length bytes: Space enough (depending on my HDD)
+    Overflow Behaviour: I prefer to lose new Messages ** Not that important
+    Dead letter exchange: Another exchange -> Another node
+
 Exchange? Direct It is enough
     Auto-Delete? NO, for sure !
 
@@ -239,6 +251,7 @@ FD(n)                       |                           Q(m).                   
                             |                           QA                                          ALARM !!!!
                             |       -----------------------------------------------------------
                             |---->   ControlQueue.   < Depending on the mes >    A light ON in a control panel !!!
+                                        1
                                     -----------------------------------------------------------
                                                 Is going to open m threads...
                                                     each one is gonna try to send a sync msg to its own EV
@@ -284,3 +297,21 @@ FD(n)                       |                           Q(m).                   
     When are Fire detectors going to send a message? When they detect fire ? Really?
         Would I like to receive a message even if there is no FIRE at all? FOR SURE !!!!
             Why? Is the detector working properly?
+            
+            
+Q1
+    Quorum: We cannot lose fire messages
+    Max length: 1
+    Dead letter exchange: YES !!!! Why? Audit
+    
+Control System Queue
+    Quorum: We cannot lose messages
+    Max length: 1 
+
+
+HomeWork:
+- Priorities
+- Lazy Mode 
+
+    Is the data important for me? YES (DURABLE QUEUE)
+    What is more important ... the data or the performance? PERFORMANCE
