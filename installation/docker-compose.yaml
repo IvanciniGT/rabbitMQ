@@ -7,6 +7,7 @@ services:
         hostname:           rabbit1     # The host name as defined inside the container
         image:              rabbitmq:3.10.7-management
         ports:
+                            - 5552:5552
                             - 5673:5672
                             - 8081:15672
         volumes:
@@ -36,7 +37,7 @@ services:
         image:              rabbitmq:3.10.7-management
         ports:
                             - 5675:5672
-                            - 8083:15672
+                            - 15672:15672
         volumes:
                             - /home/ubuntu/environment/data/rabbit3:/var/lib/rabbitmq
                             - /home/ubuntu/environment/training/installation/cluster.conf:/config/cluster.conf # To inject Host files into the Container's FS
